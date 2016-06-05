@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -34,6 +35,7 @@ import com.sun.prism.image.ViewPort;
 public class PlayScreen implements Screen {
 
     private MarioBros game;
+    private TextureAtlas atlas;
     private OrthographicCamera gamecam;
     private FitViewport gameport;
     private Hud hud;
@@ -53,6 +55,7 @@ public class PlayScreen implements Screen {
 
 
     public PlayScreen(MarioBros game) {
+        atlas = new TextureAtlas("Mario_and_Enemies.pack");
         this.game = game;
         //create camera
         gamecam = new OrthographicCamera();
@@ -77,7 +80,7 @@ public class PlayScreen implements Screen {
         new B2WorldCreator(world, map);
 
         //create the player mario
-        player = new Mario(world);
+        player = new Mario(world, this);
 
 
     }
@@ -102,11 +105,15 @@ public class PlayScreen implements Screen {
 
     public void update(float dt){
         handleInput(dt);
-
+        player.update(dt);
         world.step(1/60f, 6, 2);
         gamecam.position.x = player.b2body.getPosition().x;
         gamecam.update();
         renderer.setView(gamecam);
+    }
+
+    public TextureAtlas getAtlas(){
+        return atlas;
     }
 
     @Override
@@ -125,6 +132,11 @@ public class PlayScreen implements Screen {
 
         // render the bod2ddebug lines
         b2dr.render(world, gamecam.combined);
+
+        game.batch.setProjectionMatrix(gamecam.combined);
+        game.batch.begin();
+        player.draw(game.batch);
+        game.batch.end();
 
         //render the hud
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
