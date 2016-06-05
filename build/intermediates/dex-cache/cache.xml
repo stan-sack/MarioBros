@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/stan/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.9.3/924800875b5ce70081021240a1301b60993b62e6/gdx-box2d-1.9.3.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="924800875b5ce70081021240a1301b60993b62e6">
+        <dex dex="/home/stan/Workspace/MarioBros/android/build/intermediates/transforms/dex/debug/folders/1000/10/gdx-box2d-1.9.3_b519a997218955584346651be4d8d3ed2cda0559/classes.dex" />
+    </item>
+    <item
+        jar="/home/stan/Workspace/MarioBros/android/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="37473fe4a7107254665c773eb1320a9f6f7e1e01">
+        <dex dex="/home/stan/Workspace/MarioBros/android/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_98533838edb64b494ead5854f10c39b88df051e8/classes.dex" />
+    </item>
+    <item
+        jar="/home/stan/Workspace/MarioBros/android/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="b2a8cb527a0801ef8fcc348a3667dbdb3b46248e">
+        <dex dex="/home/stan/Workspace/MarioBros/android/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_5ee69c5e30a4e6c58b9066722d6a7702cf37f879/classes.dex" />
+    </item>
+    <item
+        jar="/home/stan/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.9.3/1a3775429980a6c8da0cdefb656ad1dabf91d629/gdx-1.9.3.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="1a3775429980a6c8da0cdefb656ad1dabf91d629">
+        <dex dex="/home/stan/Workspace/MarioBros/android/build/intermediates/transforms/dex/debug/folders/1000/10/gdx-1.9.3_aba10df1c55dab0645e6493168f242eaa5166117/classes.dex" />
+    </item>
+    <item
+        jar="/home/stan/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.9.3/c45573bf68b55442990936f007e7d6823d259c1f/gdx-backend-android-1.9.3.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="c45573bf68b55442990936f007e7d6823d259c1f">
+        <dex dex="/home/stan/Workspace/MarioBros/android/build/intermediates/transforms/dex/debug/folders/1000/10/gdx-backend-android-1.9.3_1792b8739171b6f460d34b88711c8171b7c97821/classes.dex" />
+    </item>
+
+</items>
