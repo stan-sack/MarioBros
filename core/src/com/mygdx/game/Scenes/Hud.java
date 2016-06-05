@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MarioBros;
@@ -14,7 +15,7 @@ import com.mygdx.game.MarioBros;
 /**
  * Created by stan on 4/06/16.
  */
-public class Hud {
+public class Hud implements Disposable{
     public Stage stage;
     // hud gets its own camera and viewport so because they will stay fixed while the game world
     // moves
@@ -86,4 +87,8 @@ public class Hud {
     }
 
 
+    @Override
+    public void dispose() {
+        stage.dispose();
+    }
 }
