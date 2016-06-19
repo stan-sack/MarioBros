@@ -3,6 +3,7 @@ package com.mygdx.game.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -25,6 +26,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.MarioBros;
 import com.mygdx.game.Scenes.Hud;
+import com.mygdx.game.Sprites.Goomba;
 import com.mygdx.game.Sprites.Mario;
 import com.mygdx.game.Tools.B2WorldCreator;
 import com.mygdx.game.Tools.WorldContactListener;
@@ -53,6 +55,10 @@ public class PlayScreen implements Screen {
     //mario
     private Mario player;
 
+    //music
+    private Music music;
+    private Goomba goomba;
+
 
 
     public PlayScreen(MarioBros game) {
@@ -78,11 +84,16 @@ public class PlayScreen implements Screen {
         b2dr = new Box2DDebugRenderer();
 
         //create world
-        new B2WorldCreator(world, map);
+        new B2WorldCreator(this);
 
         //create the player mario
-        player = new Mario(world, this);
+        player = new Mario(this);
+        goomba = new Goomba(this, .32f, .32f);
         world.setContactListener(new WorldContactListener());
+
+        music = MarioBros.manager.get("audio/music/mario_music.ogg", Music.class);
+        music.setLooping(true);
+        music.play();
     }
 
     public void handleInput(float dt){
@@ -106,6 +117,7 @@ public class PlayScreen implements Screen {
     public void update(float dt){
         handleInput(dt);
         player.update(dt);
+        goomba.update(dt);
         world.step(1/60f, 6, 2);
         gamecam.position.x = player.b2body.getPosition().x;
         gamecam.update();
@@ -137,6 +149,7 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
+        goomba.draw(game.batch);
         game.batch.end();
 
         //render the hud
@@ -149,7 +162,14 @@ public class PlayScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         gameport.update(width, height);
+    }
 
+    public World getWorld(){
+        return world;
+    }
+
+    public TiledMap getMap(){
+        return map;
     }
 
     @Override
