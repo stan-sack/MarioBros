@@ -27,6 +27,7 @@ import com.mygdx.game.MarioBros;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Sprites.Mario;
 import com.mygdx.game.Tools.B2WorldCreator;
+import com.mygdx.game.Tools.WorldContactListener;
 import com.sun.prism.image.ViewPort;
 
 /**
@@ -81,13 +82,12 @@ public class PlayScreen implements Screen {
 
         //create the player mario
         player = new Mario(world, this);
-
-
+        world.setContactListener(new WorldContactListener());
     }
 
     public void handleInput(float dt){
         if (Gdx.input.isKeyJustPressed(Input.Keys.UP)){
-            player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
+            player.jump();
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2){
