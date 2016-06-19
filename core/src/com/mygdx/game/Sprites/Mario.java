@@ -121,6 +121,9 @@ public class Mario extends Sprite{
         CircleShape shape = new CircleShape();
         shape.setRadius(6 / MarioBros.PPM);
 
+        fdef.filter.categoryBits = MarioBros.MARIO_BIT;
+        fdef.filter.maskBits = MarioBros.DEFAULT_BIT | MarioBros.COIN_BIT | MarioBros.BRICK_BIT;
+
         fdef.shape = shape;
         b2body.createFixture(fdef);
         EdgeShape head = new EdgeShape();

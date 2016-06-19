@@ -21,6 +21,13 @@ public class MarioBros extends Game {
 
 	//declare sprite batch (can only have one because its memory intensive)
 	public SpriteBatch batch;
+
+	//filter values
+	public static final short MARIO_BIT = 2;
+	public static final short BRICK_BIT = 4;
+	public static final short COIN_BIT = 8;
+	public static final short DESTROYED_BIT = 16;
+	public static final short DEFAULT_BIT = 1;
 	
 	@Override
 	public void create () {

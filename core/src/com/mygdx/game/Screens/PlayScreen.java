@@ -110,6 +110,7 @@ public class PlayScreen implements Screen {
         gamecam.position.x = player.b2body.getPosition().x;
         gamecam.update();
         renderer.setView(gamecam);
+        hud.update(dt);
     }
 
     public TextureAtlas getAtlas(){
