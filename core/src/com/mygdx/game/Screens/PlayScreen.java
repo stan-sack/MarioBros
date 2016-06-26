@@ -6,31 +6,20 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.MarioBros;
 import com.mygdx.game.Scenes.Hud;
-import com.mygdx.game.Sprites.Goomba;
+import com.mygdx.game.Sprites.Enemies.Enemy;
 import com.mygdx.game.Sprites.Mario;
 import com.mygdx.game.Tools.B2WorldCreator;
 import com.mygdx.game.Tools.WorldContactListener;
-import com.sun.prism.image.ViewPort;
 
 /**
  * Created by stan on 4/06/16.
@@ -51,13 +40,14 @@ public class PlayScreen implements Screen {
     //Box2D variables
     private World world;
     private Box2DDebugRenderer b2dr;
+    private B2WorldCreator creator;
 
     //mario
     private Mario player;
 
     //music
     private Music music;
-    private Goomba goomba;
+
 
 
 
@@ -84,11 +74,11 @@ public class PlayScreen implements Screen {
         b2dr = new Box2DDebugRenderer();
 
         //create world
-        new B2WorldCreator(this);
+        creator = new B2WorldCreator(this);
 
         //create the player mario
         player = new Mario(this);
-        goomba = new Goomba(this, .32f, .32f);
+
         world.setContactListener(new WorldContactListener());
 
         music = MarioBros.manager.get("audio/music/mario_music.ogg", Music.class);
@@ -116,9 +106,11 @@ public class PlayScreen implements Screen {
 
     public void update(float dt){
         handleInput(dt);
-        player.update(dt);
-        goomba.update(dt);
         world.step(1/60f, 6, 2);
+        player.update(dt);
+        for(Enemy enemy: creator.getGoombas()){
+            enemy.update(dt);
+        }
         gamecam.position.x = player.b2body.getPosition().x;
         gamecam.update();
         renderer.setView(gamecam);
@@ -149,7 +141,9 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
-        goomba.draw(game.batch);
+        for(Enemy enemy: creator.getGoombas()){
+            enemy.draw(game.batch);
+        }
         game.batch.end();
 
         //render the hud
