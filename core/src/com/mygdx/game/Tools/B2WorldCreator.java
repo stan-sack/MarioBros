@@ -12,8 +12,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MarioBros;
 import com.mygdx.game.Screens.PlayScreen;
-import com.mygdx.game.Sprites.Brick;
-import com.mygdx.game.Sprites.Coin;
+import com.mygdx.game.Sprites.TileObjects.Brick;
+import com.mygdx.game.Sprites.TileObjects.Coin;
 import com.mygdx.game.Sprites.Enemies.Goomba;
 
 /**

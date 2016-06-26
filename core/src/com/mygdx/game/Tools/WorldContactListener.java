@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.mygdx.game.MarioBros;
 import com.mygdx.game.Sprites.Enemies.Enemy;
-import com.mygdx.game.Sprites.InteractivaveTileObject;
+import com.mygdx.game.Sprites.TileObjects.InteractivaveTileObject;
 
 /**
  * Created by stan on 19/06/16.

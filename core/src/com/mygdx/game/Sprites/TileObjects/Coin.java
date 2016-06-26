@@ -1,17 +1,15 @@
-package com.mygdx.game.Sprites;
+package com.mygdx.game.Sprites.TileObjects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MarioBros;
 import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Screens.PlayScreen;
+import com.mygdx.game.Sprites.Items.ItemDef;
+import com.mygdx.game.Sprites.Items.Mushroom;
 
 /**
  * Created by stan on 5/06/16.
@@ -35,6 +33,7 @@ public class Coin extends InteractivaveTileObject {
             MarioBros.manager.get("audio/sounds/coin.wav", Sound.class).play();
         } else {
             MarioBros.manager.get("audio/sounds/bump.wav", Sound.class).play();
+            screen.spawnItem(new ItemDef(new Vector2(body.getPosition().x, body.getPosition().y + 16 / MarioBros.PPM), Mushroom.class));
         }
     }
 }
