@@ -43,7 +43,11 @@
   <object id="17" x="1216" y="128" width="16" height="16"/>
   <object id="18" x="1312" y="128" height="16"/>
   <object id="19" x="1312" y="128" width="16" height="16"/>
-  <object id="20" x="1296" y="128" width="16" height="16"/>
+  <object id="20" x="1296" y="128" width="16" height="16">
+   <properties>
+    <property name="mushroom" value=""/>
+   </properties>
+  </object>
   <object id="21" x="1328" y="128" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Bricks">

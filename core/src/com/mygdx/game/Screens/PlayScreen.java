@@ -26,6 +26,7 @@ import com.mygdx.game.Tools.B2WorldCreator;
 import com.mygdx.game.Tools.WorldContactListener;
 
 import java.util.PriorityQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * Created by stan on 4/06/16.
@@ -55,7 +56,7 @@ public class PlayScreen implements Screen {
     private Music music;
 
     private Array<Item> items;
-    private PriorityQueue<ItemDef> itemsToSpawn;
+    private LinkedBlockingDeque<ItemDef> itemsToSpawn;
 
 
 
@@ -95,7 +96,7 @@ public class PlayScreen implements Screen {
         music.play();
 
         items = new Array<Item>();
-        itemsToSpawn = new PriorityQueue<ItemDef>();
+        itemsToSpawn = new LinkedBlockingDeque<ItemDef>();
     }
 
     public void spawnItem(ItemDef idef){

@@ -26,6 +26,10 @@ public class Mario extends Sprite{
     private TextureRegion marioStand;
     private Animation marioRun;
     private Animation marioJump;
+    private TextureRegion bigMarioStand;
+    private TextureRegion bigMarioJump;
+    private Animation bigMarioRun;
+    private Animation growMario;
     private float stateTimer;
     private boolean runningRight;
 
@@ -39,19 +43,28 @@ public class Mario extends Sprite{
 
         Array<TextureRegion> frames = new Array<TextureRegion>();
         for (int i = 1; i < 4; i++){
-            frames.add(new TextureRegion(getTexture(), i*16, 0, 16, 16));
+            frames.add(new TextureRegion(screen.getAtlas().findRegion("little_mario"), i*16, 0, 16, 16));
         }
         marioRun = new Animation(0.1f, frames);
         frames.clear();
 
+        for (int i = 1; i < 4; i++){
+            frames.add(new TextureRegion(screen.getAtlas().findRegion("big_mario"), i*16, 0, 16, 32));
+        }
+        bigMarioRun = new Animation(0.1f, frames);
+        frames.clear();
+
         for (int i = 4; i < 6; i++){
-            frames.add(new TextureRegion(getTexture(), i * 16, 0, 16, 16));
+            frames.add(new TextureRegion(screen.getAtlas().findRegion("little_mario"), i * 16, 0, 16, 16));
         }
         marioJump = new Animation(0.1f, frames);
+        bigMarioJump = new TextureRegion(screen.getAtlas().findRegion("big_mario"), 80, 0, 16, 32);
+
 
         defineMario();
         //load region of texture pack
         marioStand = new TextureRegion(getTexture(), 0, 0, 16, 16);
+        bigMarioStand = new TextureRegion(screen.getAtlas().findRegion("big_mario"), 0, 0, 16, 32);
         // set bounds of mario image
         setBounds(0, 0, 16 / MarioBros.PPM, 16 / MarioBros.PPM);
         // load texture region into object
@@ -123,11 +136,12 @@ public class Mario extends Sprite{
 
         fdef.filter.categoryBits = MarioBros.MARIO_BIT;
         fdef.filter.maskBits = MarioBros.GROUND_BIT |
-                               MarioBros.COIN_BIT |
-                               MarioBros.BRICK_BIT |
-                               MarioBros.ENEMY_BIT |
-                               MarioBros.OBJECT_BIT |
-                               MarioBros.ENEMY_HEAD_BIT;
+                MarioBros.COIN_BIT |
+                MarioBros.BRICK_BIT |
+                MarioBros.ENEMY_BIT |
+                MarioBros.OBJECT_BIT |
+                MarioBros.ENEMY_HEAD_BIT |
+                MarioBros.ITEM_BIT;
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
