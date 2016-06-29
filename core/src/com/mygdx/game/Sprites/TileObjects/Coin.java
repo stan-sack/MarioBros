@@ -11,6 +11,7 @@ import com.mygdx.game.Scenes.Hud;
 import com.mygdx.game.Screens.PlayScreen;
 import com.mygdx.game.Sprites.Items.ItemDef;
 import com.mygdx.game.Sprites.Items.Mushroom;
+import com.mygdx.game.Sprites.Mario;
 
 /**
  * Created by stan on 5/06/16.
@@ -26,7 +27,7 @@ public class Coin extends InteractivaveTileObject {
     }
 
     @Override
-    public void onHeadHit() {
+    public void onHeadHit(Mario mario) {
         if (getCell().getTile() != tileSet.getTile(BLANK_COIN)) {
             Gdx.app.log("Coin", "Collision");
             getCell().setTile(tileSet.getTile(BLANK_COIN));
