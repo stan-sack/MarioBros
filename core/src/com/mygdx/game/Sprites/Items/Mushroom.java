@@ -41,7 +41,6 @@ public class Mushroom extends Item {
 
         fdef.shape = shape;
         body.createFixture(fdef).setUserData(this);
-
     }
 
     @Override

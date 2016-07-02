@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MarioBros;
 import com.mygdx.game.Screens.PlayScreen;
+import com.mygdx.game.Sprites.Mario;
 
 /**
  * Created by stan on 19/06/16.
@@ -91,8 +92,16 @@ public class Goomba extends Enemy {
         }
     }
 
-    public void hitOnHead(){
+    public void hitOnHead(Mario mario){
         setToDestroy = true;
         MarioBros.manager.get("audio/sounds/stomp.wav", Sound.class).play();
+    }
+
+    public void onEnemyHit(Enemy enemy){
+        if (enemy instanceof Turtle && ((Turtle) enemy).currentState == Turtle.State.MOVING_SHELL){
+            setToDestroy = true;
+        } else {
+            reverseVelocity(true, false);
+        }
     }
 }

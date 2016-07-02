@@ -112,6 +112,14 @@ public class PlayScreen implements Screen {
         }
     }
 
+    public boolean gameOver(){
+        if (player.getState() == Mario.State.DEAD && player.getStateTimer() > 3){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void handleInput(float dt){
         if (player.getState() != Mario.State.DEAD) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
@@ -137,7 +145,7 @@ public class PlayScreen implements Screen {
         handleSpawningItems();
         world.step(1/60f, 6, 2);
         player.update(dt);
-        for(Enemy enemy: creator.getGoombas()){
+        for(Enemy enemy: creator.getEnemies()){
             enemy.update(dt);
         }
 
@@ -176,7 +184,7 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(gamecam.combined);
         game.batch.begin();
         player.draw(game.batch);
-        for(Enemy enemy: creator.getGoombas()){
+        for(Enemy enemy: creator.getEnemies()){
             enemy.draw(game.batch);
             if (enemy.getX() < player.getX() + 224 / MarioBros.PPM)
                 enemy.b2body.setActive(true);
@@ -190,7 +198,10 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
 
-
+        if (gameOver()){
+            game.setScreen(new GameOverScreen(game));
+            dispose();
+        }
     }
 
     @Override
